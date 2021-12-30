@@ -1,0 +1,117 @@
+@import "./text";
+@import "./vairable";
+
+.footer{
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 10rem;
+  @media only screen and (max-width: $mobile-large){
+    width: 97%;
+  }
+  @media only screen and (max-width: $mobile-medium){
+     width: fit-content;
+  }
+  &-main{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8rem;
+    align-items: center;
+    margin-bottom: 7rem;
+    height: 12rem;
+    @media only screen and (max-width: $mobile-large){
+      flex-wrap: wrap;
+    }
+    @media only screen and (max-width: $mobile-medium){
+      height: auto;
+    }
+    &-container{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-around;
+    }
+
+    &-header{
+      font-family: $font-primary;
+      line-height: 3rem;
+      font-size: 2rem;
+      text-transform: capitalize;
+      font-weight: 600;
+      @media only screen and (max-width: $mobile-medium){
+        font-size: 1.3rem;
+      }
+    }
+    &-body{
+      font-family: $font-primary;
+      line-height: 3rem;
+      font-size: 1.5rem;
+      text-transform: capitalize;
+      color: #b8b6bb;
+      cursor: pointer;
+      @media only screen and (max-width: $mobile-medium){
+        font-size: 1.2rem;
+      }
+      &:hover{
+        color: #F05537;
+        transition: all .2s ease-in-out;
+      }
+      &-social{
+        margin-top: 3rem;
+        margin-bottom: 4rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+  &-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid;
+    padding-top: 20px;
+    height: 8rem;
+
+    &-last{
+      width: 21rem;
+      display: flex;
+      justify-content: space-between;
+
+      &-body{
+        font-family: $font-primary;
+        font-size: 1.5rem;
+        color: #7e7b8a;
+        line-height: 1.5625em;
+        text-transform: capitalize;
+        cursor: pointer;
+
+        &:hover{
+          color: #73c32f;
+          transition: all .2s ease-in-out;
+        }
+      }
+    }
+  }
+
+  @include text(3rem, center, 53rem);
+  &-header{
+    font-size: 5rem;
+  }
+}
+
+input[type=email] {
+  font-size: 15px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5em;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 16px;
+  height: 100%;
+  border-radius: 30px;
+  width: 48rem;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 0px 27px 0px;
+}

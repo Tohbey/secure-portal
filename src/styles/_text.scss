@@ -1,0 +1,30 @@
+@import './vairable';
+
+@mixin text($margin, $textAlign, $width){
+  &-subheader{
+    font-family: $font-primary;
+    font-size: 1.4rem;
+    color: #7e7b8a;
+    margin: $margin 0;
+    text-transform: capitalize;
+  }
+  &-header{
+    font-family: $font-primary;
+    font-size: 3rem;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: black;
+    line-height: .9em;
+    letter-spacing: -.02em;
+    margin-bottom: 2rem;
+  }
+  &-body{
+    font-family: $font-primary;
+    width: $width;
+    font-size: 1.6rem;
+    color: #7e7b8a;
+    margin: $margin 0;
+    line-height: 1.5625em;
+    text-align: $textAlign;
+  }
+}

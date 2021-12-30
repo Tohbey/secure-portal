@@ -1,0 +1,19 @@
+@import './vairable';
+@import './main';
+
+@mixin button($color, $textColor, $hoverColor) {
+  &-button {
+    padding: 1.4rem 2rem;
+    background-color: $color;
+    color: $textColor;
+    font-family: $font-medium;
+    text-transform: capitalize;
+    font-size: 1.6rem;
+    cursor: pointer;
+    border: none;
+
+    &:hover{
+      background-color: $hoverColor;
+    }
+  }
+}

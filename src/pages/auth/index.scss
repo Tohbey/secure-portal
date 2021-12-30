@@ -1,0 +1,110 @@
+@import '../../styles/text';
+@import '../../styles/button';
+@import '../../styles/form';
+
+.container {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @media only screen and (max-width: $tablet-big) {
+        flex-direction: column;
+    }
+
+    &-right {
+        width: 49%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid;
+
+        @media only screen and (max-width: $tablet-big) {
+            width: 100%;
+        }
+
+        @include button(#F05537, $white-color, #d1410c);
+
+        &-button {
+            border-radius: 10px;
+        }
+    }
+
+    &-left {
+        width: 49%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+
+        @include text(10px, left, 100%);
+        &-header{
+            text-align: left;
+        }
+
+        @media only screen and (max-width: $tablet-big) {
+            border-right: none;
+        }
+
+        &-row {
+            width: 65%;
+            padding: 2rem;
+            margin: 2rem auto;
+        }
+
+        &-link{
+            margin-left: 1rem;
+            color: #5138EE;
+            font-weight: 700;
+            text-decoration: none;
+        }
+    }
+
+    @include text(10px, center, 100%);
+
+    &-header {
+        line-height: 0;
+        letter-spacing: 0.091em
+    }
+
+    @include form();
+    &-form {
+        margin-top: 2rem;
+    
+        &__label {
+            text-transform: capitalize;
+        }
+    
+        &__group:not(:last-child) {
+            margin-bottom: 3rem;
+        }
+    
+        &__input {
+            width: 100%;
+            padding: 1rem 1rem;
+            border-radius: 10px;
+        }
+    
+        &-button {
+            border-radius: 10px;
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+    
+        &__bottom{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    
+        &__check{
+            align-items: center;
+            display: flex;
+            width: 14rem;
+            justify-content: space-between;
+        }
+    }
+}

@@ -1,10 +1,23 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import './forgot-password.scss'
+import './forgot-password.scss';
+import { useForm } from 'react-hook-form';
+
 
 const ForgotPassword = () => {
-    const [isPassword, setstateIsPassword] = useState(true)
+    const [isPassword, setisPassword] = useState(true);
+    const {register, handleSubmit, formState: {errors}} = useForm();
+
+    const submit = (data) => {
+        console.log(data)
+    }
+
+    const update = (data) => {
+        console.log(data)
+    }
+
     return (
         <div className="main">
             {
@@ -15,17 +28,19 @@ const ForgotPassword = () => {
                     <p className="password-body" >
                         Check your mail and follow the steps
                     </p>
-                    <form className="password-form">
+                    <form className="password-form" onSubmit={handleSubmit(submit)}>
                         <div className="password-form__group">
                             <label className="password-form__label">Email address</label>
                             <input
                                 type="email"
                                 className="form-control password-form__input"
                                 placeholder="Email address"
-                                id="email"
-                                required
+                                {...register("email", {
+                                    required: true,
+                                    pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                                })}
                             />
-
+                            {errors.email && <p>Please check the Email</p>}
                         </div>
                         <div>
                             <button className="password-form-button" >Submit</button>
@@ -39,17 +54,20 @@ const ForgotPassword = () => {
                 <div className="password" >
                     <p className="password-header">Forgot Password</p>
                     <p className="password-body">Enter New Password</p>
-                    <form className="password-form">
+                    <form className="password-form" onSubmit={handleSubmit(update)}>
                         <div className="password-form__group">
                             <label className="password-form__label">Password</label>
                             <input
                                 className="form-control password-form__input"
-                                placeholder="password"
+                                placeholder="*********"
                                 id="password"
-                                name="password"
-                                type="password"
-                                required
+                                {...register("password",
+                                {
+                                    required: true,
+                                    pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/
+                                })}
                             />
+                            {errors.password && <p>Please check the Password</p>}
                         </div>
                         <div>
                             <button className="password-form-button btn-primary">Submit</button>

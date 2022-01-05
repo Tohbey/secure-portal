@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable no-useless-escape */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import Image from '../../assets/Images/2919625.jpg';
 import './index.scss';
 
 
@@ -68,9 +70,7 @@ const login = () => {
                     </form>
                 </div>
             </div>
-            <div className="container-right">
-
-            </div>
+            <img className="container-right" src={Image} alt="image"/>
         </div>
     )
 }

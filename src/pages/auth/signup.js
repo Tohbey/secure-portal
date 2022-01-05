@@ -1,82 +1,19 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-escape */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepContent from '@mui/material/StepContent';
-import Button from '@mui/material/Button';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import Image from '../../assets/Images/2919625.jpg';
 import './index.scss';
 
-
-const getSteps = () => {
-    return [
-        <p className="container-left-body">Step 1</p>,
-        <p className="container-left-body">Step 2</p>
-    ]
-}
-
-const getStepContent = (step) => {
-    switch (step) {
-        case 0:
-            return (
-                <form className="container-form">
-                    <div className="container-form__group">
-                        <label className="container-form__label">first name</label>
-                        <input className="container-form__input" type="text" />
-                    </div>
-
-                    <div className="container-form__group">
-                        <label className="container-form__label">last name</label>
-                        <input className="container-form__input" type="text"/>
-                    </div>
-
-                    <div className="container-form__group">
-                        <label className="container-form__label">email</label>
-                        <input className="container-form__input" type="email"/>
-                    </div>
-                </form>
-            )
-        case 1:
-            return (
-                <form className="container-form">
-                    <div className="container-form__group">
-                        <label className="container-form__label">password</label>
-                        <input className="container-form__input" type="password"/>
-                    </div>
-
-                    <div className="container-form__group">
-                        <label className="container-form__label">secret question</label>
-                        <input className="container-form__input" type="text" />
-                    </div>
-
-                    <div className="container-form__group">
-                        <label className="container-form__label">Answer</label>
-                        <input className="container-form__input" type="email" />
-                    </div>
-
-                </form>
-            )
-        default:
-            return 'Unknown step'
-    }
-}
-
 const signup = () => {
-    const [activeStep, setActiveStep] = useState(0);
-    const steps = getSteps();
+    const {register, handleSubmit, formState: {errors}} = useForm();
 
-    const handleNext = () => {
-        setActiveStep((prevactiveStep) => prevactiveStep + 1)
+    const submit = (data) => {
+        console.log(data)
     }
-
-    const handleBack = () => {
-        setActiveStep((prevactiveStep) => prevactiveStep - 1)
-    }
-
-
     return (
         <div>
             <div className="container">
@@ -84,35 +21,96 @@ const signup = () => {
                     <div className="container-left-row">
                         <p className="container-left-header">Sign up</p>
                         <p className="container-left-body">welcome back</p>
+                        <form className="container-form" onSubmit={handleSubmit(submit)}>
+                            <div className="container-form__group">
+                                <label className="container-form__label">Surname</label>
+                                <input 
+                                    className="container-form__input" 
+                                    type="text" 
+                                    placeholder="surname"
+                                    {...register("surname", {
+                                        required: true,
+                                    })}
+                                />
+                                {errors.surname && <p>Surname is required</p>}
+                            </div>
 
-                        <Stepper activeStep={activeStep} orientation="vertical">
-                            {steps.map((label, index) => (
-                                <Step key={index}>
-                                    <StepLabel>{label}</StepLabel>
-                                    <StepContent>
-                                        <div>{getStepContent(index)}</div>
-                                        <div>
-                                            <Button
-                                                disabled={activeStep === 0}
-                                                onClick={handleBack}
-                                            >
-                                                Back
-                                            </Button>
-                                            <Button
-                                                onClick={handleNext}
-                                            >
-                                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                            </Button>
-                                        </div>
-                                    </StepContent>
-                                </Step>
-                            ))}
-                        </Stepper>
+                            <div className="container-form__group">
+                                <label className="container-form__label">othernames</label>
+                                <input 
+                                    className="container-form__input" 
+                                    type="text" 
+                                    placeholder="othernames"
+                                    {...register("othernames", {
+                                        required: true,
+                                    })}
+                                />
+                                {errors.othernames && <p>Othernames is required</p>}
+                            </div>
+
+                            <div className="container-form__group">
+                                <label className="container-form__label">email</label>
+                                <input 
+                                    className="container-form__input" 
+                                    type="email" 
+                                    placeholder="email"
+                                    {...register("email", {
+                                        required: true,
+                                    })}
+                                />
+                                {errors.email && <p>email is required</p>}
+                            </div>
+
+                            <div className="container-form__group">
+                                <label className="container-form__label">password</label>
+                                <input 
+                                    className="container-form__input" 
+                                    type="password" 
+                                    placeholder="password"
+                                    {...register("password", {
+                                        required: true,
+                                    })}
+                                />
+                                {errors.password && <p>password is required</p>}
+                            </div>
+
+                            <div className="container-form__group">
+                                <label className="container-form__label">secret question</label>
+                                <input 
+                                    className="container-form__input" 
+                                    type="text" 
+                                    placeholder="secretQuestion"
+                                    {...register("secretQuestion", {
+                                        required: true,
+                                    })}
+                                />
+                                {errors.secretQuestion && <p>secretQuestion is required</p>}
+                            </div>
+
+                            <div className="container-form__group">
+                                <label className="container-form__label">Answer</label>
+                                <input 
+                                    className="container-form__input" 
+                                    type="answer" 
+                                    placeholder="answer"
+                                    {...register("answer", {
+                                        required: true,
+                                    })}
+                                />
+                                {errors.answer && <p>answer is required</p>}
+                            </div>
+
+                            <button className="container-form-button">Sign up</button>
+
+                            <p className="container-left-body">
+                                <span>
+                                    <Link to="/auth/login" className="container-left-link">Have an Account</Link>
+                                </span>
+                            </p>
+                        </form>
                     </div>
                 </div>
-                <div className="container-right">
-
-                </div>
+                <img className="container-right" src={Image} alt="image" />
             </div>
         </div>
     )

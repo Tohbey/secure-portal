@@ -23,8 +23,6 @@
   
       &:focus {
         outline: none;
-        box-shadow: 0 1rem 2rem rgba($black-color, .1);
-        border-bottom: 2px solid $primary-color;
       }
       // &:invalid{
       //   border: 1px solid #dc3545;

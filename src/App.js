@@ -13,10 +13,10 @@ function App() {
   return (
     <Router>
       <Routes>
-          <Route path='/auth/login' exact element={<Login />} />
-          <Route path='/auth/signup' exact element={<Signup />} />
-          <Route path='/auth/validation' exact element={<Validation />} />
-          <Route path='/auth/forgot-Password' exact element={<ForgotPassword />} />
+          <Route path='/login' exact element={<Login />} />
+          <Route path='/signup' exact element={<Signup />} />
+          <Route path='/validation' exact element={<Validation />} />
+          <Route path='/forgot-Password' exact element={<ForgotPassword />} />
       </Routes>
     </Router>
   );

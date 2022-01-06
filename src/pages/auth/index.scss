@@ -28,7 +28,6 @@
 
     &-left {
         width: 49%;
-        padding: 2rem;
         display: flex;
         flex-direction: column;
 
@@ -42,9 +41,8 @@
         }
 
         &-row {
-            width: 65%;
-            padding: 2rem;
-            margin: 2rem auto;
+            width: 55%;
+            margin: 0 auto;
         }
 
         &-link{
@@ -76,7 +74,7 @@
     
         &__input {
             width: 100%;
-            padding: 1rem 1rem;
+            padding: 0.7rem 1rem;
             border-radius: 10px;
         }
     

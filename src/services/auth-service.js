@@ -1,26 +1,42 @@
 import axios from 'axios';
-
-const API_URL = ""
+import { Login, SecondAuth, changePassword, verify } from './APIs'
 
 class AuthService {
     login(email, password) {
         return axios
-            .post(API_URL + "login", { email, password })
+            .post(Login, { email, password })
             .then((response) => {
-                if (response.data) {
-                    localStorage.setItem("user", JSON.stringify(response.data))
-                }
-
+                console.log(response);
                 return response.data
             })
     }
 
-    logout() {
-        localStorage.removeItem("user");
+    secondAuth(OTPCode, secretAnswer) {
+       return axios
+            .post(SecondAuth, { OTPCode, secretAnswer })
+            .then((response) => {
+                console.log(response)
+            })
     }
 
-    register(body) {
-        return axios.post(API_URL + "user",{body});
+    verifyUser(email, OTPCode) {
+        return axios
+             .post(verify, { email, OTPCode })
+             .then((response) => {
+                 console.log(response)
+             })
+     }
+
+    changePassword(body){
+        return axios
+        .post(changePassword, {body})
+        .then((response) => {
+            console.log(response)
+        })
+    }
+
+    logout() {
+        localStorage.removeItem("x-auth-token");
     }
 }
 

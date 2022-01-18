@@ -1,52 +1,16 @@
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
     SET_MESSAGE,
+    VERIFY_SUCCESS,
+    VERIFY_FAIL
 } from "./types";
 
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/auth-service";
 
-export const register = (username, email, password) => (dispatch) => {
-    return AuthService.register(username, email, password).then(
-        (response) => {
-            dispatch({
-                type: REGISTER_SUCCESS,
-            });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
-
-            return Promise.resolve();
-        },
-        (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-
-            dispatch({
-                type: REGISTER_FAIL,
-            });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
-            });
-
-            return Promise.reject();
-        }
-    );
-};
-
-export const login = (username, password) => (dispatch) => {
-    return AuthService.login(username, password).then(
+export const login = (email, password) => (dispatch) => {
+    return AuthService.login(email, password).then(
         (data) => {
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -76,6 +40,39 @@ export const login = (username, password) => (dispatch) => {
         }
     );
 };
+
+export const secondAuth = (OTPCode, secretAnswer) => (dispatch) => {
+    return AuthService.secondAuth(OTPCode, secretAnswer).then(
+        (data) => {
+            dispatch({
+                type: VERIFY_SUCCESS,
+                payload: data
+            })
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: VERIFY_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    )
+}
+
 
 export const logout = () => (dispatch) => {
     AuthService.logout();

@@ -2,14 +2,28 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-escape */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { Question } from '../../services/APIs';
 import Image from '../../assets/Images/2919625.jpg';
 import './index.scss';
+import axios from 'axios';
+
 
 const signup = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm();
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [questions, setQuestions] = useState(null);
+
+    const fetchQuestions = async () => {
+        const res = await axios.get(Question);
+        setQuestions(res.data.data);
+    }
+
+    useEffect(() => {
+        fetchQuestions()
+    }, [])
 
     const submit = (data) => {
         console.log(data)
@@ -24,9 +38,9 @@ const signup = () => {
                         <form className="container-form" onSubmit={handleSubmit(submit)}>
                             <div className="container-form__group">
                                 <label className="container-form__label">Surname</label>
-                                <input 
-                                    className="container-form__input" 
-                                    type="text" 
+                                <input
+                                    className="container-form__input"
+                                    type="text"
                                     placeholder="surname"
                                     {...register("surname", {
                                         required: true,
@@ -37,9 +51,9 @@ const signup = () => {
 
                             <div className="container-form__group">
                                 <label className="container-form__label">othernames</label>
-                                <input 
-                                    className="container-form__input" 
-                                    type="text" 
+                                <input
+                                    className="container-form__input"
+                                    type="text"
                                     placeholder="othernames"
                                     {...register("othernames", {
                                         required: true,
@@ -50,9 +64,9 @@ const signup = () => {
 
                             <div className="container-form__group">
                                 <label className="container-form__label">email</label>
-                                <input 
-                                    className="container-form__input" 
-                                    type="email" 
+                                <input
+                                    className="container-form__input"
+                                    type="email"
                                     placeholder="email"
                                     {...register("email", {
                                         required: true,
@@ -63,9 +77,9 @@ const signup = () => {
 
                             <div className="container-form__group">
                                 <label className="container-form__label">password</label>
-                                <input 
-                                    className="container-form__input" 
-                                    type="password" 
+                                <input
+                                    className="container-form__input"
+                                    type="password"
                                     placeholder="password"
                                     {...register("password", {
                                         required: true,
@@ -76,35 +90,40 @@ const signup = () => {
 
                             <div className="container-form__group">
                                 <label className="container-form__label">secret question</label>
-                                <input 
-                                    className="container-form__input" 
-                                    type="text" 
-                                    placeholder="secretQuestion"
-                                    {...register("secretQuestion", {
+                                <select
+                                    className="container-form__input"
+                                    type="text"
+                                    placeholder="questionId"
+                                    {...register("questionId", {
                                         required: true,
                                     })}
-                                />
-                                {errors.secretQuestion && <p>secretQuestion is required</p>}
+                                >
+
+                                    {!questions ? null : questions.map((question, key) => (
+                                        <option value={question.id} key={key}>{question.question}</option>
+                                    ))}
+                                </select>
+                                {errors.questionId && <p>Question is required</p>}
                             </div>
 
                             <div className="container-form__group">
                                 <label className="container-form__label">Answer</label>
-                                <input 
-                                    className="container-form__input" 
-                                    type="answer" 
+                                <input
+                                    className="container-form__input"
+                                    type="answer"
                                     placeholder="answer"
-                                    {...register("answer", {
+                                    {...register("secretAnswer", {
                                         required: true,
                                     })}
                                 />
-                                {errors.answer && <p>answer is required</p>}
+                                {errors.secretAnswer && <p>answer is required</p>}
                             </div>
 
                             <button className="container-form-button">Sign up</button>
 
                             <p className="container-left-body">
                                 <span>
-                                    <Link to="/auth/login" className="container-left-link">Have an Account</Link>
+                                    <Link to="/login" className="container-left-link">Have an Account</Link>
                                 </span>
                             </p>
                         </form>

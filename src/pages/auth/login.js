@@ -57,14 +57,14 @@ const login = () => {
                                 <input type="checkbox" />
                                 <span>Remember me</span>
                             </div>
-                            <Link to="/auth/forgot-Password" className="container-left-link">Forgot password?</Link>
+                            <Link to="/forgot-Password" className="container-left-link">Forgot password?</Link>
                         </div>
 
                         <button className="container-form-button">Login</button>
 
                         <p className="container-left-body">Not registered yet?
                             <span>
-                                <Link to="/auth/signup" className="container-left-link">Create an Account</Link>
+                                <Link to="/signup" className="container-left-link">Create an Account</Link>
                             </span>
                         </p>
                     </form>

@@ -5,22 +5,20 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { Question } from '../../services/APIs';
+import { QuestionAPI } from '../../redux/services/APIs';
 import Image from '../../assets/Images/2919625.jpg';
 import './index.scss';
 import axios from 'axios';
-import { connect, useDispatch } from 'react-redux';
-import { createUser } from '../../store/action/user'
+import { connect } from 'react-redux';
 
 
 const signup = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [questions, setQuestions] = useState(null);
-    const dispatch = useDispatch();
 
     const fetchQuestions = async () => {
-        const res = await axios.get(Question);
+        const res = await axios.get(QuestionAPI);
         setQuestions(res.data.data);
     }
 
@@ -30,7 +28,6 @@ const signup = () => {
 
     const submit = (data) => {
         console.log(data);
-        dispatch(createUser(data))
     }
     
     return (

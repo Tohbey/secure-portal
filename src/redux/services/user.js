@@ -2,9 +2,9 @@ import {
     registerSuccess,
     request,
     requestFailure,
-    fetchCurrentUser,
-    fetchUser,
-    fetchUsers,
+    getCurrentUser,
+    getUser,
+    getUsers,
     terminateUser
 } from '../actions/user';
 import axios from 'axios';
@@ -25,42 +25,42 @@ export const createUser = (user) => async (dispatch) => {
 }
 
 
-export const currentUser = () => async (dispatch) => {
+export const fetchCurrentUser = () => async (dispatch) => {
     dispatch(request())
     try {
         const res = await axios.get(currentUserAPI);
 
         console.log(res)
 
-        dispatch(fetchCurrentUser())
+        dispatch(getCurrentUser(res.data))
     } catch (error) {
         dispatch(requestFailure(error))
         console.log(error)
     }
 }
 
-export const getUsers = () => async (dispatch) => {
+export const fetchUsers = () => async (dispatch) => {
     dispatch(request())
     try {
         const res = await axios.get(UserAPI);
 
         console.log(res)
 
-        dispatch(fetchUsers())
+        dispatch(getUsers(res.data))
     } catch (error) {
         dispatch(requestFailure(error))
         console.log(error)
     }
 }
 
-export const getUser = (id) => async (dispatch) => {
+export const fetchUser = (id) => async (dispatch) => {
     dispatch(request())
     try {
         const res = await axios.get(UserAPI+"/"+id);
 
         console.log(res)
 
-        dispatch(fetchUser(id))
+        dispatch(getUser(res.data))
     } catch (error) {
         dispatch(requestFailure(error))
         console.log(error)

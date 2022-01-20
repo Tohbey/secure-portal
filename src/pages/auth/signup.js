@@ -9,12 +9,15 @@ import { Question } from '../../services/APIs';
 import Image from '../../assets/Images/2919625.jpg';
 import './index.scss';
 import axios from 'axios';
+import { connect, useDispatch } from 'react-redux';
+import { createUser } from '../../store/action/user'
 
 
 const signup = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [questions, setQuestions] = useState(null);
+    const dispatch = useDispatch();
 
     const fetchQuestions = async () => {
         const res = await axios.get(Question);
@@ -26,8 +29,10 @@ const signup = () => {
     }, [])
 
     const submit = (data) => {
-        console.log(data)
+        console.log(data);
+        dispatch(createUser(data))
     }
+    
     return (
         <div>
             <div className="container">

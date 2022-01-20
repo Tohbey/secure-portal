@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
 import './forgot-password.scss';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+
 
 const verification = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm;
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const submit = (data) => {
         console.log(data)
@@ -13,7 +16,7 @@ const verification = () => {
         <div className="password">
             <p className="password-header">Verification</p>
             <p>Welcome Email</p>
-            <p className="password-subheader">Enter the OTP that has been sent to your email and the answer to your secret question.</p>
+            <p className="password-subheader">Enter the OTP that has been sent to your email.</p>
 
             <form className="password-form" onSubmit={handleSubmit(submit)}>
                 <div className="password-form__group">
@@ -32,6 +35,9 @@ const verification = () => {
                     <button className="password-form-button">Verify</button>
                 </div>
             </form>
+            <div>
+                <Link className="password-body" to="/login">back to login</Link>
+            </div>
         </div>
     )
 }

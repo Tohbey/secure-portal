@@ -1,10 +1,10 @@
 import {
-    FETCH_USER,
+    GET_CURRENT_USER,
     REQUEST_FAILURE,
     REQUEST,
-    FETCH_USERS,
+    GET_USER,
     REGISTER_SUCCESS,
-    FETCH_CURRENT_USER,
+    GET_USERS,
     TERMINATE_USER_SUCCESS
 } from '../actionTypes/user';
 
@@ -14,22 +14,24 @@ export const request = () => {
     }
 }
 
-export const fetchUser = (id) => {
+export const getUser = (user) => {
     return{
-        type: FETCH_USER, 
-        payload: id
+        type: GET_USER, 
+        payload: user
     }
 }
 
-export const fetchUsers = () => {
+export const getUsers = (users) => {
     return{
-        type: FETCH_USERS
+        type: GET_USERS,
+        payload: users
     }
 }
 
-export const fetchCurrentUser = () => {
+export const getCurrentUser = (currentUser) => {
     return{
-        type: FETCH_CURRENT_USER
+        type: GET_CURRENT_USER,
+        payload: currentUser
     }
 }
 

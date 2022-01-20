@@ -3,7 +3,10 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REQUEST = "REQUEST";
 export const REQUEST_FAILURE = "FETCH_FAILURE";
 
-export const FETCH_USER = "FETCH_USER"; 
-export const FETCH_CURRENT_USER = "FETCH_CURRENT_USER"; 
-export const FETCH_USERS = "FETCH_USERS";
+export const GET_USER = "GET_USER"; 
+
+export const GET_CURRENT_USER = "GET_CURRENT_USER"; 
+
+export const GET_USERS = "GET_USERS";
+
 export const TERMINATE_USER_SUCCESS = "TERMINATE_USER_SUCCESS";

@@ -16,4 +16,4 @@ export const currentUserAPI = UserAPI + "me";
 export const terminateUserAPI = UserAPI +"terminate";
 
 //Question
-export const Question = APIs +"question/";
+export const QuestionAPI = APIs +"question/";

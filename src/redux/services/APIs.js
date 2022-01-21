@@ -1,19 +1,19 @@
-export const APIs = "http://localhost:8080/api/v1/";
+export const BASE_URL = "http://localhost:8080/api/v1/";
 
 //auth
-export const AuthAPI = APIs +"auth/";
-export const LoginAPI = AuthAPI +"login";
-export const SecondAuthAPI = AuthAPI +"second-auth";
-export const resendOTPAPI = AuthAPI +"resendOtp";
-export const changePasswordAPI = AuthAPI +"change-password";
-export const resetPasswordAPI = AuthAPI +"reset-password";
-export const recoverAPI = AuthAPI +"recover";
-export const verifyAPI = AuthAPI +"verify";
+export const AuthAPI =  "auth/";
+export const LoginAPI = "login";
+export const SecondAuthAPI = "second-auth";
+export const resendOTPAPI =  "resendOtp";
+export const changePasswordAPI = "change-password";
+export const resetPasswordAPI = "reset-password";
+export const recoverAPI = "recover";
+export const verifyAPI = "verify";
 
 //user
-export const UserAPI = APIs +"user/";
+export const UserAPI = "user/";
 export const currentUserAPI = UserAPI + "me";
 export const terminateUserAPI = UserAPI +"terminate";
 
 //Question
-export const QuestionAPI = APIs +"question/";
+export const QuestionAPI = BASE_URL +"question/";

@@ -1,4 +1,4 @@
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_USER = "REGISTER_USER";
 
 export const REQUEST = "REQUEST";
 export const REQUEST_FAILURE = "FETCH_FAILURE";

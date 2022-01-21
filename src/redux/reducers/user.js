@@ -1,5 +1,5 @@
 import {
-    REGISTER_SUCCESS,
+    REGISTER_USER,
     REQUEST,
     REQUEST_FAILURE,
     GET_USER,
@@ -14,6 +14,7 @@ const initialState = {
     isError: false,
     currentUser: null,
     newUser: false,
+    email: '',
     users: []
 };
 
@@ -31,12 +32,13 @@ export const UserReducer = (state = initialState, action) => {
                 isError: true,
                 error: action.payload
             }
-        case REGISTER_SUCCESS:
+        case REGISTER_USER:
             return {
                 ...state,
                 loading: false,
                 error: '',
                 newUser: true,
+                email: action.payload,
                 isError: false,
             }
         case GET_USERS:

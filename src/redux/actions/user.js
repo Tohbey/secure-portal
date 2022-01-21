@@ -3,7 +3,7 @@ import {
     REQUEST_FAILURE,
     REQUEST,
     GET_USER,
-    REGISTER_SUCCESS,
+    REGISTER_USER,
     GET_USERS,
     TERMINATE_USER_SUCCESS
 } from '../actionTypes/user';
@@ -42,9 +42,10 @@ export const terminateUser = () => {
 }
 
 
-export const registerSuccess = () => {
+export const registerUser = (email) => {
     return{
-        type: REGISTER_SUCCESS
+        type: REGISTER_USER,
+        payload: email
     }
 }
 

@@ -7,22 +7,19 @@ import {
     getUsers,
     terminateUser
 } from '../actions/user';
-import axios from 'axios';
-import { UserAPI, currentUserAPI, terminateUserAPI } from './APIs'
+import { UserAPI, currentUserAPI, terminateUserAPI, BASE_URL } from './APIs'
+import Client from '../../utils/HTTPClient';
 
 export const createUser = (user) => async (dispatch) => {
     dispatch(request())
     try {
-        const res = await axios.post(UserAPI,  user );
+        const client = new Client(BASE_URL);
+        const res = await client.post(UserAPI,  user);
 
-        console.log(res.data)
-        let email = res.data.email;
-        console.log(email);
-
-        dispatch(registerUser(email))
+        dispatch(registerUser(res.data.email))
     } catch (error) {
         dispatch(requestFailure(error))
-        console.log(error.response.data.msg)
+        console.log(error)
     }
 }
 
@@ -30,7 +27,8 @@ export const createUser = (user) => async (dispatch) => {
 export const fetchCurrentUser = () => async (dispatch) => {
     dispatch(request())
     try {
-        const res = await axios.get(currentUserAPI);
+        const client = new Client(BASE_URL);
+        const res = await client.get(currentUserAPI);
 
         console.log(res);
        
@@ -44,7 +42,8 @@ export const fetchCurrentUser = () => async (dispatch) => {
 export const fetchUsers = () => async (dispatch) => {
     dispatch(request())
     try {
-        const res = await axios.get(UserAPI);
+        const client = new Client(BASE_URL);
+        const res = await client.get(UserAPI);
 
         console.log(res)
 
@@ -58,7 +57,8 @@ export const fetchUsers = () => async (dispatch) => {
 export const fetchUser = (id) => async (dispatch) => {
     dispatch(request())
     try {
-        const res = await axios.get(UserAPI+"/"+id);
+        const client = new Client(BASE_URL);
+        const res = await client.get(UserAPI+id);
 
         console.log(res)
 
@@ -72,7 +72,8 @@ export const fetchUser = (id) => async (dispatch) => {
 export const terminate = () => async (dispatch) =>{
     dispatch(request())
     try {
-        const res = await axios.get(terminateUserAPI);
+        const client = new Client(BASE_URL);
+        const res = await client.patch(terminateUserAPI);
 
         console.log(res)
 

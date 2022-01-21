@@ -3,13 +3,20 @@ import {
     VERIFY_SUCCESS,
     LOGOUT,
     FETCH_FAILURE,
-    FETCH_REQUEST, CHANGE_PASSWORD_SUCCESS,
+    FETCH_REQUEST, CHANGE_PASSWORD_SUCCESS, FETCH_REQUEST_STOP_LOADING,
     SECOND_AUTH_SUCCESS, RESEND_TOKEN_SUCCESS, RECOVERY_SUCCESS, RESET_PASSWORD_SUCCESS
 } from '../actionTypes/auth';
+import { authenticateUser } from '../../utils/Auth';
 
 export const fetchRequest = () => {
     return {
         type: FETCH_REQUEST
+    }
+}
+
+export const fetchRequestStopLoading = () => {
+    return {
+        type: FETCH_REQUEST_STOP_LOADING
     }
 }
 
@@ -20,15 +27,20 @@ export const fetchFailure = (error) => {
     }
 }
 
-export const loginSuccess = () => {
+export const loginSuccess = (token, questionId) => {
+    authenticateUser(token);
     return {
-        type: LOGIN_SUCCESS
+        type: LOGIN_SUCCESS,
+        payload: token,
+        questionId
     }
 }
 
-export const secondAuthSuccess = () => {
+export const secondAuthSuccess = (token) => {
+    authenticateUser(token);
     return {
-        type: SECOND_AUTH_SUCCESS
+        type: SECOND_AUTH_SUCCESS,
+        payload: token
     }
 }
 

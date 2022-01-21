@@ -1,5 +1,5 @@
 import {
-    registerSuccess,
+    registerUser,
     request,
     requestFailure,
     getCurrentUser,
@@ -13,14 +13,16 @@ import { UserAPI, currentUserAPI, terminateUserAPI } from './APIs'
 export const createUser = (user) => async (dispatch) => {
     dispatch(request())
     try {
-        const res = await axios.post(UserAPI, { user });
+        const res = await axios.post(UserAPI,  user );
 
-        console.log(res)
+        console.log(res.data)
+        let email = res.data.email;
+        console.log(email);
 
-        dispatch(registerSuccess())
+        dispatch(registerUser(email))
     } catch (error) {
         dispatch(requestFailure(error))
-        console.log(error)
+        console.log(error.response.data.msg)
     }
 }
 
@@ -30,8 +32,8 @@ export const fetchCurrentUser = () => async (dispatch) => {
     try {
         const res = await axios.get(currentUserAPI);
 
-        console.log(res)
-
+        console.log(res);
+       
         dispatch(getCurrentUser(res.data))
     } catch (error) {
         dispatch(requestFailure(error))

@@ -43,7 +43,7 @@ export const secondAuth = (OTPCode, secretAnswer) => async (dispatch) => {
 }
 
 
-export const verify = (email, OTPCode) => async (dispatch) => {
+export const verify = ({email, OTPCode}) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
         const res = await axios.post(verifyAPI, { email, OTPCode });

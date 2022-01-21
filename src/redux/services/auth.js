@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {
     fetchFailure,
     fetchRequest,
@@ -8,21 +9,31 @@ import {
     resendTokenSuccess,
     recoverySuccess,
     resetPasswordSuccess,
+    fetchRequestStopLoading,
     changePasswordSuccess
 } from '../actions/auth';
 import { AuthAPI, LoginAPI, SecondAuthAPI, changePasswordAPI, verifyAPI, resendOTPAPI, recoverAPI, resetPasswordAPI } from './APIs'
 import Client from '../../utils/HTTPClient';
+import { useNavigate } from 'react-router-dom';
+import { getAuthorizationHeader } from '../../utils/Auth';
 
+const navigate = useNavigate();
 
-export const login = (email, password) => async (dispatch) => {
+export const loginAuth = ({ email, password }) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
         const client = new Client(AuthAPI);
         const res = await client.post(LoginAPI, { email, password });
 
-        console.log(res);
+        const resJson = await res.json();
+        console.log("Login ->", resJson);
 
-        dispatch(loginSuccess())
+        dispatch(fetchRequestStopLoading());
+        if (resJson.success) {
+            dispatch(loginSuccess(resJson.meta.token, resJson.data.questionId));
+            navigate('/validation');
+        }
+
     } catch (error) {
         dispatch(fetchFailure(error))
         console.log(error)
@@ -30,15 +41,24 @@ export const login = (email, password) => async (dispatch) => {
 }
 
 
-export const secondAuth = (OTPCode, secretAnswer) => async (dispatch) => {
+export const secondAuth = ({ OTPCode, secretAnswer }) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
-        const client = new Client(AuthAPI);
+        const headers = {
+            Authorization: getAuthorizationHeader(),
+        }
+        const client = new Client(AuthAPI, headers);
         const res = await client.post(SecondAuthAPI, { OTPCode, secretAnswer });
 
-        console.log(res);
+        const resJson = await res.json();
+        console.log("Second Auth ->", resJson);
 
-        dispatch(secondAuthSuccess())
+        dispatch(fetchRequestStopLoading());
+        if (resJson.success) {
+            dispatch(secondAuthSuccess(resJson.meta));
+            navigate('/home');
+        }
+
     } catch (error) {
         dispatch(fetchFailure(error))
         console.log(error)
@@ -52,9 +72,15 @@ export const verify = ({ email, OTPCode }) => async (dispatch) => {
         const client = new Client(AuthAPI);
         const res = await client.patch(verifyAPI, { email, OTPCode });
 
-        console.log(res);
+        const resJson = await res.json();
+        console.log("Verify ->", resJson);
 
-        dispatch(verifySuccess())
+        dispatch(fetchRequestStopLoading());
+        if (resJson.success) {
+            dispatch(verifySuccess());
+            navigate('/login');
+        }
+
     } catch (error) {
         dispatch(fetchFailure(error))
         console.log(error)
@@ -79,14 +105,20 @@ export const resendOTP = (email) => async (dispatch) => {
 
 
 export const recover = (email) => async (dispatch) => {
-    dispatch(fetchRequest())
+    dispatch(fetchRequest());
     try {
         const client = new Client(AuthAPI);
         const res = await client.post(recoverAPI, { email });
 
-        console.log(res);
+        const resJson = await res.json();
+        console.log("recover ->", resJson);
 
-        dispatch(recoverySuccess())
+        dispatch(fetchRequestStopLoading());
+        if (resJson.success) {
+            dispatch(recoverySuccess());
+            navigate('/login');
+        }
+
     } catch (error) {
         dispatch(fetchFailure(error))
         console.log(error)
@@ -99,9 +131,15 @@ export const changePassword = (oldPassword, newPassword) => async (dispatch) => 
         const client = new Client(AuthAPI);
         const res = await client.patch(changePasswordAPI, { oldPassword, newPassword });
 
-        console.log(res);
+        const resJson = await res.json();
+        console.log("change Password ->", resJson);
 
-        dispatch(changePasswordSuccess())
+        dispatch(fetchRequestStopLoading());
+        if (resJson.success) {
+            dispatch(changePasswordSuccess());
+            navigate('/login');
+        }
+
     } catch (error) {
         dispatch(fetchFailure(error))
         console.log(error)
@@ -115,9 +153,15 @@ export const resetPassword = (email, token, password) => async (dispatch) => {
         const client = new Client(AuthAPI);
         const res = await client.post(resetPasswordAPI, { email, token, password });
 
-        console.log(res);
+        const resJson = await res.json();
+        console.log("Reset password ->", resJson);
 
-        dispatch(resetPasswordSuccess())
+        dispatch(fetchRequestStopLoading());
+        if (resJson.success) {
+            dispatch(resetPasswordSuccess());
+            navigate('/login');
+        }
+
     } catch (error) {
         dispatch(fetchFailure(error))
         console.log(error)

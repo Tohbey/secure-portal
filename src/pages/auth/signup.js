@@ -4,15 +4,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { QuestionAPI } from '../../redux/services/APIs';
 import Image from '../../assets/Images/2919625.jpg';
 import './index.scss';
 import axios from 'axios';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { createUser } from '../../redux/services/user';
 
 
 const signup = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const registerUser = (data) => dispatch(createUser(data))
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [questions, setQuestions] = useState(null);
@@ -28,8 +33,10 @@ const signup = () => {
 
     const submit = (data) => {
         console.log(data);
+        registerUser(data);
+        navigate('/verify');
     }
-    
+
     return (
         <div>
             <div className="container">

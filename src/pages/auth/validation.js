@@ -1,17 +1,41 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './forgot-password.scss';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { secondAuth } from '../../redux/services/auth';
+import axios from 'axios';
+import { QuestionAPI } from '../../redux/services/APIs';
+
 
 const validation = () => {
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    let questionId = '';
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [question, setQuestion] = useState('');
+    
+    const validateUser = (data) => dispatch(secondAuth(data));
+
+    const fetchQuestion = async() => {
+        const res = await axios.get(QuestionAPI +questionId)
+        setQuestion(res.data.question)
+    }
+
+    useSelector(state => {
+        questionId = state.auth.questionId
+        console.log(questionId);
+    });
+
+    useEffect(() => {
+        fetchQuestion()
+    }, [])
+
 
     const submit = (data) => {
         console.log(data)
-        navigate('/home')
     }
 
     return (
@@ -26,11 +50,9 @@ const validation = () => {
                         type="text"
                         className="form-control password-form__input"
                         placeholder="secret question"
-                        {...register("secretQuestion", {
-                            required: true,
-                        })}
+                        value={question}
+                        readOnly={true}
                     />
-                    {errors.secretQuestion && <p>Please check the secret question</p>}
 
                 </div>
 

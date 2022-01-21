@@ -1,16 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
 
-import React, { useState } from 'react';
+import React from 'react';
 import './forgot-password.scss';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { verify } from '../../redux/services/auth';
 
 
 const verification = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     let email = '';
     
@@ -27,9 +26,7 @@ const verification = () => {
     const submit = (data) => {
         data.email = email
         console.log(data);
-
         verifyUser(data)
-        navigate('/login');
     }
 
     return (

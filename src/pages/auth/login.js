@@ -1,20 +1,24 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable no-useless-escape */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react'
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Image from '../../assets/Images/2919625.jpg';
 import './index.scss';
+import { useDispatch } from 'react-redux';
+import { loginAuth  } from '../../redux/services/auth';
 
+const login = () => {
+    const dispatch = useDispatch();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
-const login = (props) => {
-    const {register, handleSubmit, formState: {errors}} = useForm();
-    const navigate = useNavigate();
+    const signUp = (data) => dispatch(loginAuth(data));
 
     const submit = (data) => {
-        console.log(data)
-        navigate('/validation');
+        console.log(data);
+        signUp(data)
     }
 
     return (
@@ -26,9 +30,9 @@ const login = (props) => {
                     <form className="container-form" onSubmit={handleSubmit(submit)}>
                         <div className="container-form__group">
                             <label className="container-form__label">email</label>
-                            <input 
-                                className="container-form__input" 
-                                type="email" 
+                            <input
+                                className="container-form__input"
+                                type="email"
                                 placeholder="Email address"
                                 {...register("email", {
                                     required: true,
@@ -40,15 +44,15 @@ const login = (props) => {
 
                         <div className="container-form__group">
                             <label className="container-form__label">password</label>
-                            <input 
-                                className="container-form__input" 
-                                type="password" 
+                            <input
+                                className="container-form__input"
+                                type="password"
                                 placeholder="********"
                                 {...register("password",
-                                {
-                                    required: true,
-                                    pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/
-                                })}
+                                    {
+                                        required: true,
+                                        pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/
+                                    })}
                             />
                             {errors.password && <p>Please check the Password</p>}
                         </div>
@@ -71,7 +75,7 @@ const login = (props) => {
                     </form>
                 </div>
             </div>
-            <img className="container-right" src={Image} alt="image"/>
+            <img className="container-right" src={Image} alt="image" />
         </div>
     )
 }

@@ -4,7 +4,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { QuestionAPI } from '../../redux/services/APIs';
 import Image from '../../assets/Images/2919625.jpg';
 import './index.scss';
@@ -14,7 +14,6 @@ import { createUser } from '../../redux/services/user';
 
 
 const signup = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const registerUser = (data) => dispatch(createUser(data))
@@ -34,7 +33,6 @@ const signup = () => {
     const submit = (data) => {
         console.log(data);
         registerUser(data);
-        navigate('/verify');
     }
 
     return (

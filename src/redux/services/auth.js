@@ -7,16 +7,17 @@ import {
     secondAuthSuccess,
     resendTokenSuccess,
     recoverySuccess,
-    resetPasswordSuccess
+    resetPasswordSuccess,
+    changePasswordSuccess
 } from '../actions/auth';
-import { BASE_URL, LoginAPI, SecondAuthAPI, verifyAPI, resendOTPAPI, recoverAPI, resetPasswordAPI } from './APIs'
+import { AuthAPI, LoginAPI, SecondAuthAPI, changePasswordAPI, verifyAPI, resendOTPAPI, recoverAPI, resetPasswordAPI } from './APIs'
 import Client from '../../utils/HTTPClient';
 
 
 export const login = (email, password) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
-        const client = new Client(BASE_URL);
+        const client = new Client(AuthAPI);
         const res = await client.post(LoginAPI, { email, password });
 
         console.log(res);
@@ -32,7 +33,7 @@ export const login = (email, password) => async (dispatch) => {
 export const secondAuth = (OTPCode, secretAnswer) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
-        const client = new Client(BASE_URL);
+        const client = new Client(AuthAPI);
         const res = await client.post(SecondAuthAPI, { OTPCode, secretAnswer });
 
         console.log(res);
@@ -48,8 +49,8 @@ export const secondAuth = (OTPCode, secretAnswer) => async (dispatch) => {
 export const verify = ({ email, OTPCode }) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
-        const client = new Client(BASE_URL);
-        const res = await client.post(verifyAPI, { email, OTPCode });
+        const client = new Client(AuthAPI);
+        const res = await client.patch(verifyAPI, { email, OTPCode });
 
         console.log(res);
 
@@ -64,8 +65,8 @@ export const verify = ({ email, OTPCode }) => async (dispatch) => {
 export const resendOTP = (email) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
-        const client = new Client(BASE_URL);
-        const res = await client.post(resendOTPAPI, { email });
+        const client = new Client(AuthAPI);
+        const res = await client.patch(resendOTPAPI, { email });
 
         console.log(res);
 
@@ -80,7 +81,7 @@ export const resendOTP = (email) => async (dispatch) => {
 export const recover = (email) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
-        const client = new Client(BASE_URL);
+        const client = new Client(AuthAPI);
         const res = await client.post(recoverAPI, { email });
 
         console.log(res);
@@ -92,11 +93,26 @@ export const recover = (email) => async (dispatch) => {
     }
 }
 
+export const changePassword = (oldPassword, newPassword) => async (dispatch) => {
+    dispatch(fetchRequest())
+    try {
+        const client = new Client(AuthAPI);
+        const res = await client.patch(changePasswordAPI, { oldPassword, newPassword });
+
+        console.log(res);
+
+        dispatch(changePasswordSuccess())
+    } catch (error) {
+        dispatch(fetchFailure(error))
+        console.log(error)
+    }
+}
+
 
 export const resetPassword = (email, token, password) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
-        const client = new Client(BASE_URL);
+        const client = new Client(AuthAPI);
         const res = await client.post(resetPasswordAPI, { email, token, password });
 
         console.log(res);

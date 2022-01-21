@@ -7,6 +7,7 @@ import {
     RESEND_TOKEN_SUCCESS,
     RECOVERY_SUCCESS,
     RESET_PASSWORD_SUCCESS,
+    CHANGE_PASSWORD_SUCCESS,
     LOGOUT
 } from '../actionTypes/auth';
 
@@ -69,10 +70,15 @@ export const AuthReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
             }
+        case CHANGE_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
         case LOGOUT:
             return {
                 ...state,
-                loading: false,   
+                loading: false,
             }
         default: return state
     }

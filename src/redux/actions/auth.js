@@ -3,7 +3,7 @@ import {
     VERIFY_SUCCESS,
     LOGOUT,
     FETCH_FAILURE,
-    FETCH_REQUEST,
+    FETCH_REQUEST, CHANGE_PASSWORD_SUCCESS,
     SECOND_AUTH_SUCCESS, RESEND_TOKEN_SUCCESS, RECOVERY_SUCCESS, RESET_PASSWORD_SUCCESS
 } from '../actionTypes/auth';
 
@@ -53,6 +53,13 @@ export const recoverySuccess = () => {
 export const resetPasswordSuccess = () => {
     return {
         type: RESET_PASSWORD_SUCCESS
+    }
+}
+
+
+export const changePasswordSuccess = () => {
+    return {
+        type: CHANGE_PASSWORD_SUCCESS
     }
 }
 

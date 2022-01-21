@@ -15,6 +15,8 @@ export const createUser = (user) => async (dispatch) => {
     try {
         const client = new Client(BASE_URL);
         const res = await client.post(UserAPI,  user);
+        
+        console.log(res)
 
         dispatch(registerUser(res.data.email))
     } catch (error) {

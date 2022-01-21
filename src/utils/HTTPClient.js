@@ -15,10 +15,21 @@ export default class HTTPClient {
                 ...headers,
             },
             body: JSON.stringify(body),
-    })).json()
+        })).json()
 
     put = async (path, body, headers = {}) => (await fetch(this.url + path, {
         method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            ...this.headers,
+            ...headers,
+        },
+        body: JSON.stringify(body),
+    })).json()
+
+    patch = async (path, body, headers = {}) => (await fetch(this.url + path, {
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',

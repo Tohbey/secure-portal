@@ -5,12 +5,19 @@ import {
     GET_USER,
     REGISTER_USER,
     GET_USERS,
-    TERMINATE_USER_SUCCESS
+    TERMINATE_USER_SUCCESS,
+    REQUEST_STOP
 } from '../actionTypes/user';
 
 export const request = () => {
     return{
         type: REQUEST
+    }
+}
+
+export const RequestStopLoading = () => {
+    return {
+        type: REQUEST_STOP
     }
 }
 

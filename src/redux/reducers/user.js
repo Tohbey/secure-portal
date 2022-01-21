@@ -5,7 +5,8 @@ import {
     GET_USER,
     GET_CURRENT_USER,
     GET_USERS,
-    TERMINATE_USER_SUCCESS
+    TERMINATE_USER_SUCCESS,
+    REQUEST_STOP
 } from '../actionTypes/user';
 
 const initialState = {
@@ -25,6 +26,11 @@ export const UserReducer = (state = initialState, action) => {
                 ...state,
                 loading: true,
             }
+        case REQUEST_STOP:
+            return {
+                ...state,
+                loading: false,
+            }
         case REQUEST_FAILURE:
             return {
                 ...state,
@@ -35,7 +41,6 @@ export const UserReducer = (state = initialState, action) => {
         case REGISTER_USER:
             return {
                 ...state,
-                loading: false,
                 error: '',
                 newUser: true,
                 email: action.payload,
@@ -44,15 +49,15 @@ export const UserReducer = (state = initialState, action) => {
         case GET_USERS:
             return {
                 ...state,
-                loading: false,
-                users: action.payload,
+                users: [
+                    ...action.payload
+                ],
                 error: '',
                 isError: false,
             }
         case GET_CURRENT_USER:
             return {
                 ...state,
-                loading: false,
                 currentUser: action.payload,
                 error: '',
                 isError: false,
@@ -60,7 +65,6 @@ export const UserReducer = (state = initialState, action) => {
         case GET_USER:
             return {
                 ...state,
-                loading: false,
                 user: action.payload,
                 error: '',
                 isError: false,
@@ -68,7 +72,6 @@ export const UserReducer = (state = initialState, action) => {
         case TERMINATE_USER_SUCCESS:
             return {
                 ...state,
-                loading: false,
                 error: '',
                 isError: false,
             }

@@ -8,6 +8,7 @@ import {
     RECOVERY_SUCCESS,
     RESET_PASSWORD_SUCCESS,
     CHANGE_PASSWORD_SUCCESS,
+    FETCH_REQUEST_STOP_LOADING,
     LOGOUT
 } from '../actionTypes/auth';
 
@@ -16,6 +17,8 @@ const initialState = {
     error: '',
     isError: false,
     isLoggedIn: false,
+    questionId: '',
+    token: '',
     secondAuth: false,
 };
 
@@ -34,51 +37,47 @@ export const AuthReducer = (state = initialState, action) => {
                 error: action.payload,
                 isError: true
             }
+        case FETCH_REQUEST_STOP_LOADING:
+            return{
+                ...state,
+                loading: false
+            }
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                loading: false,
                 isLoggedIn: true,
-                error: '',
-                isError: false
+                token: action.payload,
+                questionId: action.questionId
             }
         case SECOND_AUTH_SUCCESS:
             return {
                 ...state,
-                loading: false,
                 secondAuth: true,
-                error: '',
-                isError: false
+                token: action.payload
             }
         case VERIFY_SUCCESS:
             return {
                 ...state,
-                loading: false,
             }
         case RESEND_TOKEN_SUCCESS:
             return {
                 ...state,
-                loading: false,
             }
         case RECOVERY_SUCCESS:
             return {
                 ...state,
-                loading: false,
             }
         case RESET_PASSWORD_SUCCESS:
             return {
                 ...state,
-                loading: false,
             }
         case CHANGE_PASSWORD_SUCCESS:
             return {
                 ...state,
-                loading: false,
             }
         case LOGOUT:
             return {
                 ...state,
-                loading: false,
             }
         default: return state
     }

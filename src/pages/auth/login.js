@@ -2,18 +2,19 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Image from '../../assets/Images/2919625.jpg';
 import './index.scss';
 
 
-const login = () => {
+const login = (props) => {
     const {register, handleSubmit, formState: {errors}} = useForm();
-
+    const navigate = useNavigate();
 
     const submit = (data) => {
         console.log(data)
+        navigate('/validation');
     }
 
     return (

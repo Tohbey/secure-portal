@@ -2,13 +2,16 @@
 import React from 'react';
 import './forgot-password.scss';
 import { useForm } from 'react-hook-form';
-
+import { useNavigate } from 'react-router-dom';
 
 const validation = () => {
+    const navigate = useNavigate();
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const submit = (data) => {
         console.log(data)
+        navigate('/home')
     }
 
     return (
@@ -57,7 +60,7 @@ const validation = () => {
                     {errors.otp && <p>Please check the otp</p>}
                 </div>
                 <div>
-                    <button className="password-form-button">Verify</button>
+                    <button className="password-form-button">submit</button>
                 </div>
             </form>
         </div>

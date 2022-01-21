@@ -1,22 +1,41 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from 'react';
+/* eslint-disable no-unused-vars */
+
+import React, { useState } from 'react';
 import './forgot-password.scss';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { verify } from '../../redux/services/auth';
 
 
 const verification = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    let email = '';
+    
+    useSelector(state => {
+        email = state.user.email
+        console.log(state)
+    })
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const verifyUser = (data) => dispatch(verify(data))
+
+    //data an object with OTPCode and email properties;
     const submit = (data) => {
-        console.log(data)
+        data.email = email
+        console.log(data);
+
+        verifyUser(data)
+        navigate('/login');
     }
 
     return (
         <div className="password">
             <p className="password-header">Verification</p>
-            <p>Welcome Email</p>
-            <p className="password-subheader">Enter the OTP that has been sent to your email.</p>
+            <p className="password-subheader">Enter the OTP that has been sent to your <span style={{ textTransform: "lowercase" }}>{email}</span>.</p>
 
             <form className="password-form" onSubmit={handleSubmit(submit)}>
                 <div className="password-form__group">
@@ -25,11 +44,11 @@ const verification = () => {
                         type="text"
                         className="form-control password-form__input"
                         placeholder="11111"
-                        {...register("otp", {
+                        {...register("OTPCode", {
                             required: true,
                         })}
                     />
-                    {errors.otp && <p>Please check the otp</p>}
+                    {errors.OTPCode && <p>Please check the OTP code</p>}
                 </div>
                 <div>
                     <button className="password-form-button">Verify</button>

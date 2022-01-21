@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './forgot-password.scss';
 import { useForm } from 'react-hook-form';
 
@@ -13,8 +13,6 @@ const ForgotPassword = () => {
     const email = params.email;
     const token = params.token;
 
-    //to navigate
-    const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     console.log(email, token)
@@ -24,7 +22,6 @@ const ForgotPassword = () => {
 
     const update = (data) => {
         console.log(data);
-        navigate('/login');
     }
 
     return (

@@ -16,7 +16,7 @@ const verification = () => {
     
     useSelector(state => {
         email = state.user.email
-        console.log(state)
+        console.log(email)
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm();

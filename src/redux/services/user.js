@@ -11,26 +11,25 @@ import {
 } from '../actions/user';
 import { UserAPI, currentUserAPI, terminateUserAPI, BASE_URL } from './APIs'
 import Client from '../../utils/HTTPClient';
-import { useNavigate } from 'react-router-dom';
 
-const navigate = useNavigate();
 
 
 export const createUser = (user) => async (dispatch) => {
     dispatch(request())
+
     try {
         const client = new Client(BASE_URL);
         const res = await client.post(UserAPI, user);
-
-        const resJson = await res.json();
-        console.log("Create User ->", resJson);
+        console.log(res)
 
         dispatch(RequestStopLoading());
-        if (resJson.success) {
-            dispatch(registerUser(resJson.data.email));
-            navigate('/verify');
+        if (res.data) {
+            dispatch(registerUser(res.data.email));
+            console.log("Create User ->", res);
+            return null;
         }
 
+        return res.data;
     } catch (error) {
         dispatch(requestFailure(error))
         console.log(error)
@@ -44,14 +43,14 @@ export const fetchCurrentUser = () => async (dispatch) => {
         const client = new Client(BASE_URL);
         const res = await client.get(currentUserAPI);
 
-        const resJson = await res.json();
-        console.log("Current User ->", resJson);
+        console.log("Current User ->", res.data);
 
         dispatch(RequestStopLoading());
-        if (resJson.success) {
-            dispatch(getCurrentUser(resJson.data))
+        if (res.data) {
+            dispatch(getCurrentUser(res.data))
         }
 
+        return res.data;
     } catch (error) {
         dispatch(requestFailure(error))
         console.log(error)
@@ -64,14 +63,14 @@ export const fetchUsers = () => async (dispatch) => {
         const client = new Client(BASE_URL);
         const res = await client.get(UserAPI);
 
-        const resJson = await res.json();
-        console.log("Fetch Users ->", resJson);
+        console.log("Fetch Users ->", res.data);
 
         dispatch(RequestStopLoading());
-        if (resJson.success) {
-            dispatch(getUsers(resJson.data))
+        if (res.data) {
+            dispatch(getUsers(res.data))
         }
 
+        return res.data;
     } catch (error) {
         dispatch(requestFailure(error))
         console.log(error)
@@ -84,14 +83,14 @@ export const fetchUser = (id) => async (dispatch) => {
         const client = new Client(BASE_URL);
         const res = await client.get(UserAPI + id);
 
-        const resJson = await res.json();
-        console.log("Fetch User ->", resJson);
+        console.log("Fetch User ->", res.data);
 
         dispatch(RequestStopLoading());
-        if (resJson.success) {
-            dispatch(getUser(resJson.data))
+        if (res.data) {
+            dispatch(getUser(res.data))
         }
 
+        return res.data;
     } catch (error) {
         dispatch(requestFailure(error))
         console.log(error)

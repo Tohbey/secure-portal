@@ -4,12 +4,13 @@
 import React from 'react';
 import './forgot-password.scss';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { verify } from '../../redux/services/auth';
 
 
 const verification = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     let email = '';
     
@@ -23,10 +24,16 @@ const verification = () => {
     const verifyUser = (data) => dispatch(verify(data))
 
     //data an object with OTPCode and email properties;
-    const submit = (data) => {
-        data.email = email
-        console.log(data);
-        verifyUser(data)
+    const submit = async (data) => {
+        try {
+            data.email = email;
+            console.log(data)
+            verifyUser(data)
+            navigate('/login');
+        } catch (error) {
+            console.error(error);
+        }
+  
     }
 
     return (

@@ -3,7 +3,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Image from '../../assets/Images/2919625.jpg';
 import './index.scss';
@@ -11,14 +11,19 @@ import { useDispatch } from 'react-redux';
 import { loginAuth  } from '../../redux/services/auth';
 
 const login = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const signUp = (data) => dispatch(loginAuth(data));
 
-    const submit = (data) => {
-        console.log(data);
-        signUp(data)
+    const submit = async (data) => {
+        try {
+            signUp(data);
+            navigate('/validation');
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (

@@ -4,7 +4,7 @@ var ls = new SecureLS();
 
 export const isAuthenticated = () => ls.get('token');
 
-export const getAuthorizationHeader = () => `x-auth-token ${isAuthenticated()}`;
+export const getAuthorizationHeader = () => `${isAuthenticated()}`;
 
 export const removeAuthenticatedState = () => {
     ls.remove('token');

@@ -3,39 +3,50 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react';
 import './forgot-password.scss';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { secondAuth } from '../../redux/services/auth';
-import axios from 'axios';
 import { QuestionAPI } from '../../redux/services/APIs';
+import Client from '../../utils/HTTPClient';
 
 
 const validation = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     let questionId = '';
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [question, setQuestion] = useState('');
-    
+
     const validateUser = (data) => dispatch(secondAuth(data));
 
-    const fetchQuestion = async() => {
-        const res = await axios.get(QuestionAPI +questionId)
+    const fetchQuestion = async () => {
+        const client = new Client(QuestionAPI);
+
+        const res = await client.get(questionId);
+        console.log("question ->",res.data.question)
         setQuestion(res.data.question)
     }
 
     useSelector(state => {
-        questionId = state.auth.questionId
-        console.log(questionId);
+        console.log(state);
+        questionId = state.auth.questionId;
     });
 
     useEffect(() => {
-        fetchQuestion()
+        fetchQuestion();
     }, [])
 
 
-    const submit = (data) => {
-        console.log(data)
+    const submit = async (data) => {
+        try {
+            validateUser(data)
+            navigate('/home');
+        } catch (error) {
+            console.error(error);
+        }
+
     }
 
     return (
@@ -61,12 +72,12 @@ const validation = () => {
                     <input
                         type="text"
                         className="form-control password-form__input"
-                        placeholder="answer"
-                        {...register("answer", {
+                        placeholder="secretAnswer"
+                        {...register("secretAnswer", {
                             required: true,
                         })}
                     />
-                    {errors.answer && <p>Please check the answer</p>}
+                    {errors.secretAnswer && <p>Please check the answer</p>}
                 </div>
 
                 <div className="password-form__group">
@@ -75,11 +86,11 @@ const validation = () => {
                         type="text"
                         className="form-control password-form__input"
                         placeholder="11111"
-                        {...register("otp", {
+                        {...register("OTPCode", {
                             required: true,
                         })}
                     />
-                    {errors.otp && <p>Please check the otp</p>}
+                    {errors.OTPCode && <p>Please check the otp</p>}
                 </div>
                 <div>
                     <button className="password-form-button">submit</button>

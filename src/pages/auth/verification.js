@@ -15,13 +15,13 @@ const verification = () => {
     let email = '';
     
     useSelector(state => {
-        email = state.user.email
-        console.log(email)
+        email = state?.user?.email
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const verifyUser = (data) => dispatch(verify(data))
+    console.log(email)
 
     //data an object with OTPCode and email properties;
     const submit = async (data) => {

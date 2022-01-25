@@ -36,7 +36,7 @@ const validation = () => {
 
     useEffect(() => {
         fetchQuestion();
-    }, [])
+    }, [questionId])
 
 
     const submit = async (data) => {

@@ -1,13 +1,20 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import React from 'react'
+import { Link, useParams,useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import './forgot-password.scss';
+import { recover, resetPassword } from '../../redux/services/auth';
 import { useForm } from 'react-hook-form';
 
 
 const ForgotPassword = () => {
-    const [isPassword, setisPassword] = useState(true);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+
+    const recoverPassword = (data) => dispatch(recover(data));
+    const reset = (data) => dispatch(resetPassword(data));
     //getting params
     let params = useParams();
     const email = params.email;
@@ -16,12 +23,26 @@ const ForgotPassword = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     console.log(email, token)
-    const submit = (data) => {
-        console.log(data)
+
+    const submit = async (data) => {
+        try {
+            console.log(data)
+            recoverPassword(data);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    const update = (data) => {
-        console.log(data);
+    const update = async (data) => {
+        try {
+            data.email = email;
+            data.token = token;
+            console.log(data)
+            reset(data);
+            navigate('/login');
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
@@ -78,7 +99,7 @@ const ForgotPassword = () => {
                                 {errors.password && <p>Please check the Password</p>}
                             </div>
                             <div>
-                                <button className="password-form-button btn-primary">Submit</button>
+                                <button className="password-form-button btn-primary">Update</button>
                             </div>
                         </form>
                     </div>

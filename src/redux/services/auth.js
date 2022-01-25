@@ -102,7 +102,7 @@ export const resendOTP = (email) => async (dispatch) => {
 }
 
 
-export const recover = (email) => async (dispatch) => {
+export const recover = ({ email }) => async (dispatch) => {
     dispatch(fetchRequest());
     try {
         const client = new Client(AuthAPI);
@@ -122,7 +122,7 @@ export const recover = (email) => async (dispatch) => {
     }
 }
 
-export const changePassword = (oldPassword, newPassword) => async (dispatch) => {
+export const changePassword = ({ oldPassword, newPassword }) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
         const client = new Client(AuthAPI);
@@ -143,7 +143,7 @@ export const changePassword = (oldPassword, newPassword) => async (dispatch) => 
 }
 
 
-export const resetPassword = (email, token, password) => async (dispatch) => {
+export const resetPassword = ({ email, token, password }) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
         const client = new Client(AuthAPI);

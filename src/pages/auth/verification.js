@@ -12,11 +12,8 @@ import { verify } from '../../redux/services/auth';
 const verification = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    let email = '';
     
-    useSelector(state => {
-        email = state?.user?.email
-    })
+    const email = useSelector((state) =>  state?.user?.email);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 

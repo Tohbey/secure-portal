@@ -14,10 +14,11 @@ import Client from '../../utils/HTTPClient';
 const validation = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    let questionId = '';
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [question, setQuestion] = useState('');
+    const questionId = useSelector((state) => state.auth.questionId);
+
 
     const validateUser = (data) => dispatch(secondAuth(data));
 
@@ -25,14 +26,10 @@ const validation = () => {
         const client = new Client(QuestionAPI);
 
         const res = await client.get(questionId);
-        console.log("question ->",res.data.question)
+        console.log("question ->", res.data.question)
         setQuestion(res.data.question)
     }
 
-    useSelector(state => {
-        console.log(state);
-        questionId = state.auth.questionId;
-    });
 
     useEffect(() => {
         fetchQuestion();
@@ -61,7 +58,7 @@ const validation = () => {
                         type="text"
                         className="form-control password-form__input"
                         placeholder="secret question"
-                        value={question}
+                        value={question ? question : ''}
                         readOnly={true}
                     />
 

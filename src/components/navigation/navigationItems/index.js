@@ -1,22 +1,17 @@
 import React from 'react';
 
 import NavigationItem from '../navigationItem';
+import '../../styles.scss';
 
 const navigationItems = (props) => (
-    <div>
-        <header>
-            <div>
-                Secure Portal
-            </div>
-        </header>
-
-        <ul>
+    <div className="nav">
+        <ul  className="nav-list">
             <NavigationItem link="/home">Home</NavigationItem>
             <NavigationItem link="/uploaded">uploaded documents</NavigationItem>
             <NavigationItem link="/share">share</NavigationItem>
             <NavigationItem link="/shared-document">shared documents</NavigationItem>
             <NavigationItem link="/profile">hello, email</NavigationItem>
-            <button>Logout</button>
+            <button className="logout-button">Logout</button>
         </ul>
     </div>
 )

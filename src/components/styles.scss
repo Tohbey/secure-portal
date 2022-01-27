@@ -1,0 +1,59 @@
+@import '../styles/button';
+
+
+.navigation {
+    background-color: white;
+    display: flex;
+    width: 100%;
+    padding: 1rem 6rem;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%);
+
+    &-logo {
+        display: flex;
+        align-items: flex-end;
+
+        &-body {
+            font-size: 1.7rem;
+            text-transform: capitalize;
+            font-weight: 600;
+            color: black;
+            line-height: .9em;
+            letter-spacing: -.02em;
+        }
+    }
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-list {
+        display: flex;
+        list-style: none;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+    }
+
+    &-items {
+        padding: 10px;
+        text-transform: capitalize;
+        font-size: 1.5rem;
+        cursor: pointer;
+        position: relative;
+        text-decoration: none;
+        color: black;
+    }
+}
+
+.logout {
+    @include button(red, white, #c43434);
+    &-button{
+        padding: 1rem 1rem;
+        border-radius: 9px;
+    }
+}

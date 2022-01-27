@@ -1,12 +1,12 @@
 import React from 'react';
 import Dashboard from '../../container/dashboard';
 
-const home = () =>  {
+const uploadedDocuments = () => {
     return (
         <Dashboard>
-            <p>Home</p>
+            <p>Uploaded documents</p>
         </Dashboard>
     )
 }
 
-export default home
+export default uploadedDocuments;

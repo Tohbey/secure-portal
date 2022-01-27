@@ -1,12 +1,12 @@
 import React from 'react';
 import Dashboard from '../../container/dashboard';
 
-const home = () =>  {
+const profile = () => {
     return (
         <Dashboard>
-            <p>Home</p>
+            <p>Profile</p>
         </Dashboard>
     )
 }
 
-export default home
+export default profile;

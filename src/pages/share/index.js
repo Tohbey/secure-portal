@@ -1,12 +1,12 @@
 import React from 'react';
 import Dashboard from '../../container/dashboard';
 
-const home = () =>  {
+const shareDocuments = () => {
     return (
         <Dashboard>
-            <p>Home</p>
+            <p>share documents</p>
         </Dashboard>
     )
 }
 
-export default home
+export default shareDocuments;

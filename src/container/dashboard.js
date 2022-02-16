@@ -1,12 +1,12 @@
 import React, { Fragment,Component } from 'react';
 import Navbar from '../components/navbar/navbar';
-
+import './dashboard.scss'
 class Dashboard extends Component {
   render() {
     return (
         <Fragment>
             <Navbar />
-            <main>{this.props.children}</main>
+            <main className="main">{this.props.children}</main>
         </Fragment>
     );
   }

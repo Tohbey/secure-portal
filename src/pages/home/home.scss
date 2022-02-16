@@ -1,0 +1,47 @@
+@import '../../styles/button';
+@import '../../styles/text';
+@import '../../styles/form';
+
+.home{
+    width: 50%; 
+    height: auto;
+
+    @include text(10px, center, 100%);
+    &-header {
+        line-height: 0;
+        font-size: 2rem;
+        letter-spacing: 0.05em
+    }
+    
+    @include form();
+    &-form {
+        margin-top: 4rem;
+    
+        &__label {
+            text-transform: capitalize;
+        }
+    
+        &__group:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    
+        &__input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 5px;
+        }
+    
+        &-button {
+            border-radius: 10px;
+            width: 15rem;
+            margin: 1.5rem 0;
+        }
+    
+        &__check{
+            align-items: center;
+            display: flex;
+            width: 14rem;
+            justify-content: space-between;
+        }
+    }
+}

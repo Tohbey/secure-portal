@@ -1,0 +1,15 @@
+@import '../../styles/button';
+@import '../../styles/text';
+@import '../../styles/form';
+
+.shared{
+    width: 100%; 
+    height: auto;
+
+    @include text(10px, center, 100%);
+    &-header {
+        line-height: 0;
+        font-size: 2rem;
+        letter-spacing: 0.05em
+    }
+}

@@ -42,16 +42,16 @@ const signup = () => {
 
     return (
         <div>
-            <div className="container">
-                <div className="container-left">
-                    <div className="container-left-row">
-                        <p className="container-left-header">Sign up</p>
-                        <p className="container-left-body">welcome back</p>
-                        <form className="container-form" onSubmit={handleSubmit(submit)}>
-                            <div className="container-form__group">
-                                <label className="container-form__label">Surname</label>
+            <div className="auth-container">
+                <div className="auth-container-left">
+                    <div className="auth-container-left-row">
+                        <p className="auth-container-left-header">Sign up</p>
+                        <p className="auth-container-left-body">welcome back</p>
+                        <form className="auth-container-form" onSubmit={handleSubmit(submit)}>
+                            <div className="auth-container-form__group">
+                                <label className="auth-container-form__label">Surname</label>
                                 <input
-                                    className="container-form__input"
+                                    className="auth-container-form__input"
                                     type="text"
                                     placeholder="surname"
                                     {...register("surname", {
@@ -61,10 +61,10 @@ const signup = () => {
                                 {errors.surname && <p>Surname is required</p>}
                             </div>
 
-                            <div className="container-form__group">
-                                <label className="container-form__label">othernames</label>
+                            <div className="auth-container-form__group">
+                                <label className="auth-container-form__label">othernames</label>
                                 <input
-                                    className="container-form__input"
+                                    className="auth-container-form__input"
                                     type="text"
                                     placeholder="othernames"
                                     {...register("othernames", {
@@ -74,10 +74,10 @@ const signup = () => {
                                 {errors.othernames && <p>Othernames is required</p>}
                             </div>
 
-                            <div className="container-form__group">
-                                <label className="container-form__label">email</label>
+                            <div className="auth-container-form__group">
+                                <label className="auth-container-form__label">email</label>
                                 <input
-                                    className="container-form__input"
+                                    className="auth-container-form__input"
                                     type="email"
                                     placeholder="email"
                                     {...register("email", {
@@ -87,10 +87,10 @@ const signup = () => {
                                 {errors.email && <p>email is required</p>}
                             </div>
 
-                            <div className="container-form__group">
-                                <label className="container-form__label">password</label>
+                            <div className="auth-container-form__group">
+                                <label className="auth-container-form__label">password</label>
                                 <input
-                                    className="container-form__input"
+                                    className="auth-container-form__input"
                                     type="password"
                                     placeholder="password"
                                     {...register("password", {
@@ -100,10 +100,10 @@ const signup = () => {
                                 {errors.password && <p>password is required</p>}
                             </div>
 
-                            <div className="container-form__group">
-                                <label className="container-form__label">secret question</label>
+                            <div className="auth-container-form__group">
+                                <label className="auth-container-form__label">secret question</label>
                                 <select
-                                    className="container-form__input"
+                                    className="auth-container-form__input"
                                     type="text"
                                     placeholder="questionId"
                                     {...register("questionId", {
@@ -118,10 +118,10 @@ const signup = () => {
                                 {errors.questionId && <p>Question is required</p>}
                             </div>
 
-                            <div className="container-form__group">
-                                <label className="container-form__label">Answer</label>
+                            <div className="auth-container-form__group">
+                                <label className="auth-container-form__label">Answer</label>
                                 <input
-                                    className="container-form__input"
+                                    className="auth-container-form__input"
                                     type="answer"
                                     placeholder="answer"
                                     {...register("secretAnswer", {
@@ -131,17 +131,18 @@ const signup = () => {
                                 {errors.secretAnswer && <p>answer is required</p>}
                             </div>
 
-                            <button className="container-form-button">Sign up</button>
+                            <button className="auth-container-form-button">Sign up</button>
 
-                            <p className="container-left-body">
+                            <p className="auth-container-left-body">
                                 <span>
-                                    <Link to="/login" className="container-left-link">Have an Account</Link>
+                                    Have an Account? 
+                                    <Link to="/login" className="auth-container-left-link">Sign in</Link>
                                 </span>
                             </p>
                         </form>
                     </div>
                 </div>
-                <img className="container-right" src={Image} alt="image" />
+                <img className="auth-container-right" src={Image} alt="image" />
             </div>
         </div>
     )

@@ -30,8 +30,8 @@ const uploadedDocuments = () => {
                             <th>testing</th>
                             <th>testing</th>
                             <td>
-                                <button>delete</button>
-                                <button>View</button>
+                                <button className="btn btn-danger" style={{"margin-right":"1rem"}}>delete</button>
+                                <button className="btn btn-primary">View</button>
                             </td>
                         </tr>
                     </tbody>

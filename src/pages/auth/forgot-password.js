@@ -46,7 +46,7 @@ const ForgotPassword = () => {
     }
 
     return (
-        <div className="main">
+        <div className="mainp">
             {
                 (!email && !token) ?
                     <div className="password">

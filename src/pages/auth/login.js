@@ -27,16 +27,16 @@ const login = () => {
     }
 
     return (
-        <div className="container">
-            <div className="container-left">
-                <div className="container-left-row">
-                    <p className="container-left-header">Login</p>
-                    <p className="container-left-body">welcome back</p>
-                    <form className="container-form" onSubmit={handleSubmit(submit)}>
-                        <div className="container-form__group">
-                            <label className="container-form__label">email</label>
+        <div className="auth-container">
+            <div className="auth-container-left">
+                <div className="auth-container-left-row">
+                    <p className="auth-container-left-header">Login</p>
+                    <p className="auth-container-left-body">welcome back</p>
+                    <form className="auth-container-form" onSubmit={handleSubmit(submit)}>
+                        <div className="auth-container-form__group">
+                            <label className="auth-container-form__label">email</label>
                             <input
-                                className="container-form__input"
+                                className="auth-container-form__input"
                                 type="email"
                                 placeholder="Email address"
                                 {...register("email", {
@@ -47,10 +47,10 @@ const login = () => {
                             {errors.email && <p>Please check the Email</p>}
                         </div>
 
-                        <div className="container-form__group">
-                            <label className="container-form__label">password</label>
+                        <div className="auth-container-form__group">
+                            <label className="auth-container-form__label">password</label>
                             <input
-                                className="container-form__input"
+                                className="auth-container-form__input"
                                 type="password"
                                 placeholder="********"
                                 {...register("password",
@@ -62,25 +62,25 @@ const login = () => {
                             {errors.password && <p>Please check the Password</p>}
                         </div>
 
-                        <div className="container-form__bottom container-left-body">
-                            <div className="container-form__check">
+                        <div className="auth-container-form__bottom auth-container-left-body">
+                            <div className="auth-container-form__check">
                                 <input type="checkbox" />
                                 <span>Remember me</span>
                             </div>
-                            <Link to="/forgot-Password" className="container-left-link">Forgot password?</Link>
+                            <Link to="/forgot-Password" className="auth-container-left-link">Forgot password?</Link>
                         </div>
 
-                        <button className="container-form-button">Login</button>
+                        <button className="auth-container-form-button">Login</button>
 
-                        <p className="container-left-body">Not registered yet?
+                        <p className="auth-container-left-body">Not registered yet?
                             <span>
-                                <Link to="/signup" className="container-left-link">Create an Account</Link>
+                                <Link to="/signup" className="auth-container-left-link">Create an Account</Link>
                             </span>
                         </p>
                     </form>
                 </div>
             </div>
-            <img className="container-right" src={Image} alt="image" />
+            <img className="auth-container-right" src={Image} alt="image" />
         </div>
     )
 }

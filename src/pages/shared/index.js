@@ -30,7 +30,7 @@ const sharedDocuments = () => {
                             <th>testing</th>
                             <th>testing</th>
                             <td>
-                                <button>View</button>
+                                <button className="btn btn-primary">View</button>
                             </td>
                         </tr>
                     </tbody>

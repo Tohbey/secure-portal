@@ -14,23 +14,26 @@ import Profile from '../src/pages/profile';
 import SharedDocuments from '../src/pages/shared';
 import ShareDocuments from '../src/pages/share';
 import UploadedDocuments from '../src/pages/uploaded';
+import ProtectedRoute from './components/protectedRoute';
 
 function App() {
   return (
     <Router>
       <Routes>
-          <Route path='/login' exact element={<Login />} />
-          <Route path='/validation' exact element={<Validation />} />
-          <Route path='/signup' exact element={<Signup />} />
-          <Route path='/verify' exact element={<Verification />} />
-          <Route path='/forgot-Password' exact element={<ForgotPassword />} />
-          <Route path='/forgot-Password/:email/:token' exact element={<ForgotPassword />} />
+        <Route path='/login' exact element={<Login />} />
+        <Route path='/validation' exact element={<Validation />} />
+        <Route path='/signup' exact element={<Signup />} />
+        <Route path='/verify' exact element={<Verification />} />
+        <Route path='/forgot-Password' exact element={<ForgotPassword />} />
+        <Route path='/forgot-Password/:email/:token' exact element={<ForgotPassword />} />
+        <Route element={<ProtectedRoute />}>
           <Route path='/home' exact element={<Home />} />
           <Route path='/profile' exact element={<Profile />} />
           <Route path='/share' exact element={<ShareDocuments />} />
           <Route path='/shared-document' exact element={<SharedDocuments />} />
           <Route path='/uploaded' exact element={<UploadedDocuments />} />
-          <Route path='' element={<Navigate to="login" />} />
+        </Route>
+        <Route path='' element={<Navigate to="login" />} />
       </Routes>
     </Router>
   );

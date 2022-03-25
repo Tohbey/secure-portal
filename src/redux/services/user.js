@@ -9,8 +9,9 @@ import {
     terminateUser,
     requestStopLoading
 } from '../actions/user';
-import { UserAPI, currentUserAPI, terminateUserAPI, BASE_URL } from './APIs'
+import { UserAPI, CurrentUserAPI, TerminateUserAPI, BASE_URL } from './APIs'
 import Client from '../../utils/HTTPClient';
+import { getAuthorizationHeader } from '../../utils/Auth';
 
 
 
@@ -20,7 +21,6 @@ export const createUser = (user) => async (dispatch) => {
     try {
         const client = new Client(BASE_URL);
         const res = await client.post(UserAPI, user);
-        console.log(res)
 
         dispatch(requestStopLoading());
         if (res.data) {
@@ -40,12 +40,15 @@ export const createUser = (user) => async (dispatch) => {
 export const fetchCurrentUser = () => async (dispatch) => {
     dispatch(request())
     try {
-        const client = new Client(BASE_URL);
-        const res = await client.get(currentUserAPI);
+        const headers = {
+            'x-auth-token': getAuthorizationHeader(),
+        }
+        const client = new Client(BASE_URL, headers);
+        const res = await client.get(CurrentUserAPI);
 
         console.log("Current User ->", res.data);
 
-        dispatch(RequestStopLoading());
+        dispatch(requestStopLoading());
         if (res.data) {
             dispatch(getCurrentUser(res.data))
         }
@@ -60,12 +63,15 @@ export const fetchCurrentUser = () => async (dispatch) => {
 export const fetchUsers = () => async (dispatch) => {
     dispatch(request())
     try {
-        const client = new Client(BASE_URL);
+        const headers = {
+            'x-aut;h-token': getAuthorizationHeader(),
+        }
+        const client = new Client(BASE_URL, headers);
         const res = await client.get(UserAPI);
 
         console.log("Fetch Users ->", res.data);
 
-        dispatch(RequestStopLoading());
+        dispatch(requestStopLoading());
         if (res.data) {
             dispatch(getUsers(res.data))
         }
@@ -80,12 +86,15 @@ export const fetchUsers = () => async (dispatch) => {
 export const fetchUser = (id) => async (dispatch) => {
     dispatch(request())
     try {
-        const client = new Client(BASE_URL);
+        const headers = {
+            'x-auth-token': getAuthorizationHeader(),
+        };
+        const client = new Client(BASE_URL, headers);
         const res = await client.get(UserAPI + id);
 
         console.log("Fetch User ->", res.data);
 
-        dispatch(RequestStopLoading());
+        dispatch(requestStopLoading());
         if (res.data) {
             dispatch(getUser(res.data))
         }
@@ -100,8 +109,11 @@ export const fetchUser = (id) => async (dispatch) => {
 export const terminate = () => async (dispatch) => {
     dispatch(request())
     try {
-        const client = new Client(BASE_URL);
-        const res = await client.patch(terminateUserAPI);
+        const headers = {
+            'x-auth-token': getAuthorizationHeader(),
+        };
+        const client = new Client(BASE_URL, headers);
+        const res = await client.patch(TerminateUserAPI);
 
         console.log(res)
 

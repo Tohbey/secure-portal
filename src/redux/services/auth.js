@@ -12,7 +12,7 @@ import {
     fetchRequestStopLoading,
     changePasswordSuccess
 } from '../actions/auth';
-import { AuthAPI, LoginAPI, SecondAuthAPI, changePasswordAPI, verifyAPI, resendOTPAPI, recoverAPI, resetPasswordAPI } from './APIs'
+import { AuthAPI, LoginAPI, SecondAuthAPI, ChangePasswordAPI, VerifyAPI, ResendOTPAPI, RecoverAPI, ResetPasswordAPI } from './APIs'
 import Client from '../../utils/HTTPClient';
 import { getAuthorizationHeader } from '../../utils/Auth';
 
@@ -68,7 +68,7 @@ export const verify = ({ email, OTPCode }) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
         const client = new Client(AuthAPI);
-        const res = await client.patch(verifyAPI, { email, OTPCode });
+        const res = await client.patch(VerifyAPI, { email, OTPCode });
 
         console.log("Verify ->", res);
 
@@ -90,7 +90,7 @@ export const resendOTP = (email) => async (dispatch) => {
     dispatch(fetchRequest())
     try {
         const client = new Client(AuthAPI);
-        const res = await client.patch(resendOTPAPI, { email });
+        const res = await client.patch(ResendOTPAPI, { email });
 
         console.log(res);
 
@@ -106,7 +106,7 @@ export const recover = ({ email }) => async (dispatch) => {
     dispatch(fetchRequest());
     try {
         const client = new Client(AuthAPI);
-        const res = await client.post(recoverAPI, { email });
+        const res = await client.post(RecoverAPI, { email });
 
         console.log("recover ->", res);
 
@@ -126,7 +126,7 @@ export const changePassword = ({ oldPassword, newPassword }) => async (dispatch)
     dispatch(fetchRequest())
     try {
         const client = new Client(AuthAPI);
-        const res = await client.patch(changePasswordAPI, { oldPassword, newPassword });
+        const res = await client.patch(ChangePasswordAPI, { oldPassword, newPassword });
 
         console.log("change Password ->", res);
 
@@ -147,7 +147,7 @@ export const resetPassword = ({ email, token, password }) => async (dispatch) =>
     dispatch(fetchRequest())
     try {
         const client = new Client(AuthAPI);
-        const res = await client.post(resetPasswordAPI, { email, token, password });
+        const res = await client.post(ResetPasswordAPI, { email, token, password });
 
         console.log("Reset password ->", res.data);
 

@@ -15,7 +15,7 @@ export const request = () => {
     }
 }
 
-export const RequestStopLoading = () => {
+export const requestStopLoading = () => {
     return {
         type: REQUEST_STOP
     }

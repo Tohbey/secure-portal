@@ -7,7 +7,7 @@ import {
     getUser,
     getUsers,
     terminateUser,
-    RequestStopLoading
+    requestStopLoading
 } from '../actions/user';
 import { UserAPI, currentUserAPI, terminateUserAPI, BASE_URL } from './APIs'
 import Client from '../../utils/HTTPClient';
@@ -22,7 +22,7 @@ export const createUser = (user) => async (dispatch) => {
         const res = await client.post(UserAPI, user);
         console.log(res)
 
-        dispatch(RequestStopLoading());
+        dispatch(requestStopLoading());
         if (res.data) {
             dispatch(registerUser(res.data.email));
             console.log("Create User ->", res);

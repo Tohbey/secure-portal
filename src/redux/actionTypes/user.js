@@ -2,7 +2,7 @@ export const REGISTER_USER = "REGISTER_USER";
 
 export const REQUEST = "REQUEST";
 export const REQUEST_STOP = "REQUEST_STOP";
-export const REQUEST_FAILURE = "FETCH_FAILURE";
+export const REQUEST_FAILURE = "REQUEST_FAILURE";
 
 export const GET_USER = "GET_USER"; 
 
